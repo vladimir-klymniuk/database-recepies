@@ -1,0 +1,40 @@
+version: "3.8"
+
+
+services:
+  redis:
+    build:
+      context: ./docker/redis
+      args:
+        - REDIS_VERSION=${REDIS_VERSION}
+    volumes:
+        - ${DATA_PATH_HOST}/redis:/data
+    ports:
+        - "${REDIS_PORT}:6379"
+    networks:
+        - backend
+
+  mysql:
+    build:
+      context: ./docker/mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
+    cap_add:
+        - SYS_NICE
+    environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQ_PASSWORD=${MYSQL_PASSWORD}
+        - TZ=${WORKSPACE_TIMEZONE}
+    volumes:
+        - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+    ports:
+        - "${MYSQL_PORT}:3306"
+    networks:
+        - backend
+
+networks:
+    backend:
+        driver: ${NETWORKS_DRIVER}
+
