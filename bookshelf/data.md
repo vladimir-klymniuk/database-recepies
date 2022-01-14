@@ -17,7 +17,7 @@
     - id
     - name
     - importance (required, recommended, optional)
-    - status (in transit, available)
+    - status (in transit, available, on bookshelf)
 
 `book_history`
 
@@ -27,13 +27,13 @@
     - human id
     - status    
 
-`transportation`
+`tracking`
     - id 
     - status    
 
-`transportation_history`    
+`tracking_history`    
 
-`application_transportation` 
+`application_tracking` 
     - id 
     - application id
     - book id
@@ -73,4 +73,4 @@
 * activated at
 * deactivated at
 
-почти всё релейшены о истории и книгах это многие ко многим.
+почти всё релейшены о истории и книгах это многие ко многим. less 15 mins. 
